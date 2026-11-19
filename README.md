@@ -8,6 +8,8 @@
 - Provided as is, without warranty. Part of the **DESKTOP MAC TOOLKIT**. Inspired by Pure Paste (Sindre Sorhus); no code shared.
 - In the app: menu **mPASTE ▸ About mPASTE**.
 
+![The mPASTE overview with plain-text paste active, the last paste and the four cleaning rules.](docs/screenshot.png)
+
 ## Fonctions (1.0)
 
 - **⌘V en texte brut partout** (interception par événement clavier, autorisation Accessibilité) ; le presse-papiers d'origine, mise en forme comprise, est restauré juste après. **⌥⌘V** colle avec la mise en forme, **⌃⌥P** met en pause.
