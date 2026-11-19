@@ -6,7 +6,9 @@ import SwiftUI
 /// Aplat de couleur dynamique (suit le thème clair/sombre), pour le fond et la barre de titre.
 private final class FillView: NSView {
     var fill: NSColor { didSet { needsDisplay = true } }
-    init(_ fill: NSColor) { self.fill = fill; super.init(frame: .zero) }
+    init(_ fill: NSColor) { self.fill = fill; super.init(frame: .zero); wantsLayer = true }
+    override var wantsUpdateLayer: Bool { true }
+    override func updateLayer() { effectiveAppearance.performAsCurrentDrawingAppearance { layer?.backgroundColor = fill.cgColor } }
     required init?(coder: NSCoder) { fatalError() }
     override func draw(_ dirtyRect: NSRect) { fill.setFill(); dirtyRect.fill() }
 }

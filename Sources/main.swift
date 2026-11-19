@@ -29,4 +29,5 @@ let app = NSApplication.shared
 let delegate = MainActor.assumeIsolated { AppDelegate() }
 app.delegate = delegate
 app.setActivationPolicy(CommandLine.arguments.contains("--agent") ? .accessory : .regular)
+if CommandLine.arguments.contains("--show-about") { DispatchQueue.main.asyncAfter(deadline: .now() + 1) { About.show() } }
 app.run()
