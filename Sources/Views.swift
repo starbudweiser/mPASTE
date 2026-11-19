@@ -204,6 +204,7 @@ struct ServicePage: View {
     @State private var installed = ServiceInstaller.isInstalled
     @State private var loaded = ServiceInstaller.isLoaded
     @State private var failed = false
+    @State private var busy = false
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Card(title: L.t("svc.title")) {
@@ -218,10 +219,16 @@ struct ServicePage: View {
                 Divider().overlay(Socle.C.border)
                 HStack {
                     Button(installed ? L.t("svc.uninstall") : L.t("svc.install")) {
-                        failed = !(installed ? ServiceInstaller.uninstall() : ServiceInstaller.install()); refresh()
-                    }.buttonStyle(SocleButtonStyle(installed ? .secondary : .primary, height: 28))
+                        guard !busy else { return }
+                        busy = true; failed = false
+                        let wasInstalled = installed
+                        DispatchQueue.global().async {
+                            let ok = wasInstalled ? ServiceInstaller.uninstall() : ServiceInstaller.install()
+                            DispatchQueue.main.async { failed = !ok; busy = false; refresh() }
+                        }
+                    }.buttonStyle(SocleButtonStyle(installed ? .secondary : .primary, height: 28)).disabled(busy)
                     if installed { Button(L.t("svc.reveal")) { NSWorkspace.shared.activateFileViewerSelecting([ServiceInstaller.plistURL]) }.buttonStyle(SocleButtonStyle(.secondary, height: 28)) }
-                    if failed { Text(L.t("svc.failed")).socle(Socle.T.meta).foregroundStyle(Socle.C.danger) }
+                    if failed { Text(ServiceInstaller.lastError.isEmpty ? L.t("svc.failed") : "\(L.t("svc.failed")) \(ServiceInstaller.lastError)").socle(Socle.T.meta).foregroundStyle(Socle.C.danger).lineLimit(3) }
                 }.padding(.top, 8)
             }
             if installed { Card(title: L.t("svc.plist")) { Text(ServiceInstaller.plistURL.path.replacingOccurrences(of: NSHomeDirectory(), with: "~")).socle(Socle.T.monoSm).textSelection(.enabled).padding(6) } }

@@ -25,14 +25,31 @@ enum ServiceInstaller {
         """
     }
 
+    /// Dernier message d'erreur de launchctl (affiché dans l'interface quand l'installation échoue).
+    nonisolated(unsafe) static var lastError = ""
+
     @discardableResult
     static func install() -> Bool {
-        guard let exe = Bundle.main.executablePath else { return false }
+        lastError = ""
+        guard let exe = Bundle.main.executablePath else { lastError = "executable"; return false }
         let dir = plistURL.deletingLastPathComponent()
-        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
-        guard (try? plistContents(executable: exe).write(to: plistURL, atomically: true, encoding: .utf8)) != nil else { return false }
-        _ = run("/bin/launchctl", ["bootout", "gui/\(uid)/\(label)"])
-        return run("/bin/launchctl", ["bootstrap", "gui/\(uid)", plistURL.path]).status == 0
+        do {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            try plistContents(executable: exe).write(to: plistURL, atomically: true, encoding: .utf8)
+        } catch { lastError = error.localizedDescription; return false }
+        if isLoaded { _ = run("/bin/launchctl", ["bootout", "gui/\(uid)/\(label)"]); Thread.sleep(forTimeInterval: 0.6) }
+        _ = run("/bin/launchctl", ["enable", "gui/\(uid)/\(label)"])
+        // bootstrap peut échouer (erreur 5) juste après un bootout ou un lancement : on réessaie, puis repli sur `load`.
+        for attempt in 0..<4 {
+            let r = run("/bin/launchctl", ["bootstrap", "gui/\(uid)", plistURL.path])
+            if r.status == 0 || isLoaded { return true }
+            lastError = r.out.trimmingCharacters(in: .whitespacesAndNewlines)
+            Thread.sleep(forTimeInterval: 0.5 * Double(attempt + 1))
+        }
+        let r = run("/bin/launchctl", ["load", "-w", plistURL.path])
+        if r.status == 0 || isLoaded { return true }
+        if !r.out.isEmpty { lastError = r.out.trimmingCharacters(in: .whitespacesAndNewlines) }
+        return false
     }
 
     @discardableResult
