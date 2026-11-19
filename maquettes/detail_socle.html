@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>mPASTE — Maquettes détaillées (Socle)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#131316;--card:#1c1c1f;--ctl:#2c2c31;--t:#f5f5f7;--t2:#98989f;--acc:#0a84ff;--m:#f59e0b;--ok:#30d158;--warn:#ff9f0a;--bd:1px solid #303035}
+body{font:12.5px/1.4 -apple-system,"SF Pro Text",system-ui,sans-serif;background:#0b0b0d;color:var(--t);padding:18px 28px 40px}
+h1{font-size:18px;margin-bottom:4px}h1 b{color:var(--m)}.sub{color:#999;margin-bottom:12px}
+.tabs{display:flex;gap:6px;margin-bottom:14px}.tabs button{background:#222;color:#eee;border:0;padding:7px 14px;border-radius:4px;font:inherit;cursor:pointer}.tabs button.on{background:var(--acc)}
+.screen{display:none;gap:24px;align-items:flex-start;flex-wrap:wrap}.screen.on{display:flex}
+.cap{color:#999;margin-bottom:6px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.win{width:760px;background:var(--bg);border:var(--bd);border-radius:8px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:var(--bd)}
+.lights{display:flex;gap:6px}.lights i{width:11px;height:11px;border-radius:50%}.lights i:nth-child(1){background:#ff5f57}.lights i:nth-child(2){background:#febc2e}.lights i:nth-child(3){background:#28c840}
+.brand{font-weight:700;margin-left:6px}.brand b{color:var(--m)}
+.body{padding:14px;display:flex;flex-direction:column;gap:10px}
+.box{background:var(--card);border:var(--bd);border-radius:6px;padding:10px}
+.h{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--t2);margin-bottom:6px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;gap:10px;border-top:var(--bd)}.row:first-of-type{border:0}
+.row small{display:block;color:var(--t2);font-size:11.5px}
+.tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--ctl);color:var(--t2)}
+.ok{background:color-mix(in srgb,var(--ok) 22%,transparent);color:var(--ok)}.warn{background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--warn)}
+.btn{background:var(--ctl);padding:6px 12px;border-radius:4px;display:inline-block;font-weight:500}.pri{background:var(--acc)}
+.sw{width:34px;height:20px;border-radius:99px;background:var(--ctl);position:relative;flex:none;cursor:pointer}.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff}.sw.on{background:var(--acc)}.sw.on::after{left:16px}
+.kbd i{font-style:normal;background:var(--ctl);border-radius:4px;padding:3px 8px;font-weight:600;margin-left:4px}
+.pop{width:300px;background:var(--bg);border:var(--bd);border-radius:8px;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.5);display:flex;flex-direction:column;gap:8px}
+.menubar{width:300px;background:#1c1c1f;border-radius:6px 6px 0 0;padding:6px 10px;display:flex;justify-content:flex-end;gap:12px;color:#ddd;align-items:center}
+.ico{width:16px;height:16px;border:2px solid #fff;border-radius:3px;position:relative}.ico::after{content:"T";position:absolute;inset:0;font:700 10px/12px sans-serif;text-align:center}
+.mi{display:flex;justify-content:space-between;padding:6px 8px;border-radius:4px}.mi:hover{background:var(--ctl)}.sep{height:1px;background:#303035;margin:2px 0}
+.code{font:11.5px/1.5 ui-monospace,Menlo,monospace;color:#c9d1d9;background:#0e0e10;border-radius:4px;padding:10px}
+.perm{border-left:3px solid var(--warn)}
+</style></head><body>
+<h1><b>m</b>PASTE — Maquettes détaillées</h1><div class="sub">Design Socle standard · menu de la barre, fenêtre Service, premier lancement</div>
+<div class="tabs" id="tabs"><button data-s="a" class="on">Barre de menus</button><button data-s="b">Service système</button><button data-s="c">Premier lancement</button></div>
+
+<div class="screen on" id="a">
+ <div><div class="cap">Icône monochrome + menu sous l'icône</div>
+  <div class="menubar"><span>🔋</span><span class="ico"></span><span>Jeu. 19 nov 14:02</span></div>
+  <div class="pop">
+   <div style="display:flex;justify-content:space-between;align-items:center"><b><span style="color:var(--m)">m</span>PASTE</b><span class="tag ok">● Actif</span></div>
+   <div class="box"><div class="h">Dernier collage</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:11.5px">Offre de printemps — mon-site.fr/</div><div style="color:var(--t2);margin-top:4px">Pistage retiré · mise en forme supprimée</div></div>
+   <div class="mi"><span>Mettre en pause</span><span class="kbd"><i>⌃⌥P</i></span></div>
+   <div class="mi"><span>Coller avec la mise en forme</span><span class="kbd"><i>⌥⌘V</i></span></div>
+   <div class="sep"></div>
+   <div class="mi"><span>Ouvrir mPASTE…</span><span>⌘,</span></div>
+   <div class="mi"><span>À propos de mPASTE</span></div>
+   <div class="mi"><span>Quitter mPASTE</span><span>⌘Q</span></div>
+  </div></div>
+ <div><div class="cap">Notes</div><div class="box" style="width:380px;color:var(--t2)">Le nom est en texte normal dans le menu déroulant (règle Socle). Le « m » orange n'apparaît que dans l'en-tête de la fenêtre et du panneau.<br><br>Menu ouvert à la main sous l'icône (pas de <code>statusItem.menu</code>).</div></div>
+</div>
+
+<div class="screen" id="b">
+ <div><div class="cap">Fenêtre — Service système</div>
+ <div class="win"><div class="bar"><div class="lights"><i></i><i></i><i></i></div><div class="brand"><b>m</b>PASTE · Service système</div></div>
+  <div class="body">
+   <div class="box"><div class="h">Agent d'arrière-plan</div>
+    <div class="row"><span>État<small>com.starbudweiser.mpaste.agent</small></span><span class="tag ok" id="st">● Installé et en cours</span></div>
+    <div class="row"><span>Lancer à l'ouverture de session</span><span class="sw on"></span></div>
+    <div class="row"><span>Relancer s'il s'arrête (KeepAlive)</span><span class="sw on"></span></div>
+    <div class="row"><span>Afficher l'icône dans le Dock</span><span class="sw"></span></div>
+    <div style="display:flex;gap:8px;margin-top:8px"><span class="btn" id="bt">Désinstaller le service</span><span class="btn">Redémarrer</span><span class="btn">Révéler le plist</span></div></div>
+   <div class="box"><div class="h">Fichier installé</div><div class="code">~/Library/LaunchAgents/com.starbudweiser.mpaste.agent.plist<br>launchctl bootstrap gui/501 …</div></div>
+   <div class="box perm"><div class="h">Autorisation</div><div class="row"><span>Accessibilité<small>Nécessaire pour intercepter ⌘V</small></span><span class="tag ok">✓ Accordée</span></div></div>
+  </div></div></div>
+</div>
+
+<div class="screen" id="c">
+ <div><div class="cap">Premier lancement (3 étapes)</div>
+ <div class="win" style="width:520px"><div class="bar"><div class="lights"><i></i><i></i><i></i></div><div class="brand">Bienvenue dans <b>m</b>PASTE</div></div>
+  <div class="body">
+   <div class="box"><div class="h">1 · Autorisation</div><div class="row"><span>Accessibilité<small>Pour que ⌘V colle en texte brut</small></span><span class="btn pri">Ouvrir Réglages Système</span></div></div>
+   <div class="box"><div class="h">2 · Service</div><div class="row"><span>Installer l'agent d'arrière-plan<small>Lancement automatique à la connexion</small></span><span class="sw on"></span></div></div>
+   <div class="box"><div class="h">3 · Applis exclues</div><div style="color:var(--t2)">Pages, Keynote, Mail (corps) proposés — modifiable ensuite.</div></div>
+   <div style="text-align:right"><span class="btn pri">Terminer</span></div>
+  </div></div></div>
+</div>
+<script>
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===b.dataset.s))});
+document.querySelectorAll('.sw').forEach(e=>e.onclick=()=>e.classList.toggle('on'));
+let i=true;document.getElementById('bt').onclick=function(){i=!i;this.textContent=i?'Désinstaller le service':'Installer le service';const s=document.getElementById('st');s.textContent=i?'● Installé et en cours':'○ Non installé';s.className='tag '+(i?'ok':'warn')};
+</script></body></html>

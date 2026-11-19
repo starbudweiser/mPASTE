@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>mPASTE — Maquettes (comparaison des designs)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--rr:20}
+body{font:13px/1.4 -apple-system,"SF Pro Text",system-ui,sans-serif;background:#0b0b0d;color:#eee;-webkit-font-smoothing:antialiased}
+.top{padding:18px 28px 6px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.top h1{font-size:20px;font-weight:700}.top .sub{color:#999}
+.tabs{display:flex;gap:6px;padding:10px 28px;flex-wrap:wrap}
+.tabs button{background:#222;color:#eee;border:0;padding:8px 16px;border-radius:999px;font:inherit;font-weight:500;cursor:pointer}
+.tabs button.on{background:#ffd21e;color:#222}
+.tools{display:none;align-items:center;gap:14px;padding:4px 28px 12px;color:#aaa;flex-wrap:wrap}
+.tools.on{display:flex}
+.tools input[type=range]{width:220px;accent-color:#ffd21e}
+.tools .seg{display:inline-flex;background:#222;border-radius:999px;padding:3px}
+.tools .seg button{border:0;background:none;color:#eee;font:inherit;padding:4px 14px;border-radius:999px;cursor:pointer}
+.tools .seg button.on{background:#444}
+.tools output{color:#fff;font-weight:600;min-width:34px}
+.stage{padding:6px 28px 40px}
+
+/* ---------- fenêtre commune ---------- */
+.win{width:980px;height:640px;display:grid;grid-template-columns:230px 1fr;grid-template-rows:auto 1fr;overflow:hidden;position:relative;background:var(--bg);color:var(--t);border-radius:var(--rw);box-shadow:var(--sh);font-size:13px}
+.bar{grid-column:1/3;display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:var(--bd)}
+.lights{display:flex;gap:7px}.lights i{width:12px;height:12px;border-radius:50%;display:block}
+.lights i:nth-child(1){background:#ff5f57}.lights i:nth-child(2){background:#febc2e}.lights i:nth-child(3){background:#28c840}
+.brand{font-weight:700;font-size:15px;margin-left:8px}.brand b{color:var(--m)}
+.state{margin-left:auto;display:flex;align-items:center;gap:10px;color:var(--t2);font-size:12px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 25%,transparent)}
+.btn{background:var(--ctl);color:var(--t);border:0;padding:6px 12px;border-radius:var(--rc);font:inherit;font-weight:500;display:inline-block}
+.btn.pri{background:var(--acc);color:var(--onacc)}
+.side{padding:12px;display:flex;flex-direction:column;gap:4px;border-right:var(--bd)}
+.nav{padding:8px 10px;border-radius:var(--rc);color:var(--t2);display:flex;gap:9px;align-items:center}
+.nav.on{background:var(--ctl);color:var(--t);font-weight:600}
+.main{padding:16px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.h{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--t2);margin-bottom:6px}
+.box{background:var(--card);border:var(--bd);border-radius:var(--rb);padding:12px;box-shadow:var(--shc)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;gap:10px}
+.row>span:first-child{color:var(--t)}.row small{display:block;color:var(--t2);font-size:11.5px}
+.tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:var(--rch);background:var(--ctl);color:var(--t2)}
+.tag.ok{background:color-mix(in srgb,var(--ok) 22%,transparent);color:var(--ok)}
+.tag.warn{background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--warn)}
+.sw{width:36px;height:21px;border-radius:99px;background:var(--ctl);position:relative;flex:none}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.sw.on{background:var(--acc)}.sw.on::after{left:17px}
+.kbd{display:inline-flex;gap:4px}.kbd i{font-style:normal;background:var(--ctl);border-radius:var(--rc);padding:3px 8px;font-weight:600;min-width:26px;text-align:center}
+.cmp{display:grid;grid-template-columns:1fr 36px 1fr;gap:8px;align-items:stretch}
+.cmp .arrow{display:grid;place-items:center;color:var(--t2);font-size:18px}
+.clip{background:var(--ctl);border-radius:var(--rb);padding:12px;min-height:128px}
+.clip .h{margin-bottom:8px}
+.clip.after{outline:2px solid var(--acc)}
+.rich h4{font:700 17px/1.2 Georgia,serif;color:#c0392b;margin-bottom:5px}
+.rich p{font:italic 13px/1.4 Georgia,serif;color:#2e7d6b}.rich a{color:#2563eb;text-decoration:underline}
+.plain{font:12.5px/1.5 ui-monospace,Menlo,monospace}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.apps .row{border-top:var(--bd);padding:6px 0}.apps .row:first-child{border:0}
+.ai{width:22px;height:22px;border-radius:6px;display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:#fff;margin-right:8px;vertical-align:middle;background:#888}
+.svc{display:flex;gap:10px;align-items:center}
+.foot{margin-top:auto;display:flex;gap:10px;color:var(--t2);font-size:12px;align-items:center}
+.m{color:var(--m)}
+/* ---------- 1. Flat Round (rayon réglable) ---------- */
+[data-d=round]{--rw:calc(var(--rr)*1px + 6px);--rb:calc(var(--rr)*1px);--rc:calc(var(--rr)*.6px);--rch:calc(var(--rr)*1px);--m:#f5b800;--ok:#2fb36a;--warn:#e08a00;
+ --sh:0 24px 60px rgba(0,0,0,.35);--shc:none;--bd:none}
+[data-d=round][data-th=sombre]{--bg:#131316;--card:#232327;--ctl:#2c2c31;--t:#f5f5f7;--t2:#98989f;--acc:#0a84ff;--onacc:#fff;--ok:#30d158;--warn:#ff9f0a}
+[data-d=round][data-th=clair]{--bg:#f1f1f5;--card:#fff;--ctl:#e8e8ef;--t:#1c1c22;--t2:#6b6b78;--acc:#6a5af0;--onacc:#fff;--sh:0 24px 60px rgba(0,0,0,.18);--shc:0 1px 0 rgba(0,0,0,.04)}
+[data-d=round] .side{border:0}[data-d=round] .bar{border:0}
+[data-d=round] .mod:nth-child(1) .ico{background:#7c6cff}[data-d=round] .mod:nth-child(2) .ico{background:#ff7a59}
+[data-d=round] .mod:nth-child(3) .ico{background:#2fb36a}[data-d=round] .mod:nth-child(4) .ico{background:#19a7ce}
+[data-d=round] .mod:nth-child(5) .ico{background:#e0558a}
+/* ---------- 2. Socle standard ---------- */
+[data-d=socle]{--rw:8px;--rb:6px;--rc:4px;--rch:4px;--bg:#131316;--card:#1c1c1f;--ctl:#2c2c31;--t:#f5f5f7;--t2:#98989f;--acc:#0a84ff;--onacc:#fff;--m:#f59e0b;--ok:#30d158;--warn:#ff9f0a;
+ --sh:0 20px 50px rgba(0,0,0,.5);--shc:none;--bd:1px solid #303035;font-size:12.5px}
+[data-d=socle] .ico{background:#333;color:#38bdf8;border-radius:4px;width:34px;height:34px}
+[data-d=socle] .mod{grid-template-columns:34px 1fr 150px 90px;padding:8px 12px}
+[data-d=socle] .box{padding:10px}
+/* ---------- 3. Flat Mat ---------- */
+[data-d=mat]{--rw:12px;--rb:12px;--rc:8px;--rch:999px;--bg:#f4f1ec;--card:#fff;--ctl:#ebe6de;--t:#26231e;--t2:#7b756a;--acc:#26231e;--onacc:#f4f1ec;--m:#d9622b;--ok:#3f8f5a;--warn:#b7791f;
+ --sh:0 18px 50px rgba(60,40,10,.18);--shc:none;--bd:1px solid #e3ddd2}
+[data-d=mat][data-th=sombre]{--bg:#131316;--card:#232327;--ctl:#2c2c31;--t:#f5f5f7;--t2:#98989f;--acc:#0a84ff;--onacc:#fff;--m:#f08a52;--ok:#30d158;--warn:#ff9f0a;--sh:0 18px 50px rgba(0,0,0,.5);--bd:1px solid #303035}
+[data-d=mat] .ico{background:#26231e;color:#f4f1ec}
+[data-d=mat][data-th=sombre] .ico{background:#2c2c31;color:#f5f5f7}
+[data-d=mat] .mod.first{outline-color:#d9622b}
+/* ---------- 4. Verre (Apple Stephan) ---------- */
+[data-d=verre]{--rw:22px;--rb:18px;--rc:12px;--rch:999px;--bg:linear-gradient(135deg,#2a1f5c,#0e4a6b 55%,#14383a);--card:rgba(255,255,255,.10);--ctl:rgba(255,255,255,.14);--t:#f5f5f7;--t2:rgba(235,235,245,.62);--acc:#0a84ff;--onacc:#fff;--m:#ffd21e;--ok:#5fe08a;--warn:#ffc04d;
+ --sh:0 30px 70px rgba(0,0,0,.5);--shc:inset 0 1px 0 rgba(255,255,255,.18);--bd:1px solid rgba(255,255,255,.14)}
+[data-d=verre] .box,[data-d=verre] .mod{backdrop-filter:blur(24px) saturate(1.4)}
+[data-d=verre] .ico{background:linear-gradient(135deg,#ffffff55,#ffffff18);border:1px solid rgba(255,255,255,.25)}
+[data-d=verre] .side{background:rgba(255,255,255,.05)}
+
+[data-d=socle] .box{padding:10px}[data-d=verre] .box,[data-d=verre] .clip{backdrop-filter:blur(24px) saturate(1.4)}
+[data-d=verre] .side{background:rgba(255,255,255,.05)}
+[data-d=round] .side{border:0}[data-d=round] .bar{border:0}
+.legend{color:#999;padding:0 28px 10px;max-width:1120px}
+</style></head><body>
+<div class="top"><h1><span style="color:#ffd21e">m</span>PASTE — Maquettes</h1><span class="sub">Même écran dans les 4 designs · écran principal : état, aperçu avant / après, règles, applis exclues, service système</span></div>
+<nav class="tabs" id="tabs"><button data-d="round" class="on">Flat Round</button><button data-d="socle">Socle standard</button><button data-d="mat">Flat Mat</button><button data-d="verre">Apple Stephan (verre)</button></nav>
+<div class="tools on" id="tools"><label class="rad">Arrondis des objets</label><input class="rad" type="range" id="rr" min="0" max="32" value="20"><output class="rad" id="rrv">20</output>
+ <span class="seg" id="seg"><button data-th="sombre" class="on">Sombre</button><button data-th="clair">Clair</button></span>
+ <span class="seg rad" id="presets"><button data-v="0">Carré</button><button data-v="10">Doux</button><button data-v="20" class="on">Rond</button><button data-v="32">Très rond</button></span></div>
+<div class="legend" id="legend"></div>
+<div class="stage"><div class="win" id="win" data-d="round" data-th="sombre">
+ <div class="bar"><div class="lights"><i></i><i></i><i></i></div><div class="brand"><b>m</b>PASTE</div>
+  <div class="state"><span class="dot" id="dot"></span><span id="stx">Collage en texte brut actif</span> · <b style="color:var(--t)">1 248 collages nettoyés</b><span class="btn" id="pause">Mettre en pause</span></div></div>
+ <div class="side"><div class="nav on" data-v="all">▣ Aperçu</div><div class="nav" data-v="rules">⚑ Règles</div><div class="nav" data-v="apps">▤ Applis</div><div class="nav" data-v="keys">⌨ Raccourcis</div><div class="nav" data-v="svc">⚙ Service système</div><div class="nav" data-v="about">ⓘ À propos</div>
+  <div class="foot" style="flex-direction:column;align-items:flex-start;gap:4px"><span>DESKTOP MAC TOOLKIT</span><span>v1.0 · à jour</span></div></div>
+ <div class="main">
+  <div data-s="all"><div class="h">Dernier presse-papiers</div><div class="cmp">
+   <div class="clip"><div class="h">Copié (avec mise en forme)</div><div class="rich" style="background:#fff;border-radius:6px;padding:8px"><h4>Offre de printemps</h4><p>Jusqu'à -30 % sur la gamme, voir <a>mon-site.fr/?utm_source=mail&amp;fbclid=A9x</a></p></div></div>
+   <div class="arrow">→</div>
+   <div class="clip after"><div class="h">Collé en texte brut <span class="tag ok">✓ nettoyé</span></div><div class="plain" id="plain">Offre de printemps<br>Jusqu'à -30 % sur la gamme, voir mon-site.fr/</div></div></div></div>
+  <div class="two" data-s="all rules keys svc">
+   <div class="box" data-s="all rules"><div class="h">Règles de nettoyage</div>
+    <div class="row"><span>Coller toujours en texte brut<small>⌘V sans mise en forme</small></span><span class="sw on"></span></div>
+    <div class="row"><span>Retirer le pistage des liens<small>utm_*, fbclid, gclid…</small></span><span class="sw on" id="swutm"></span></div>
+    <div class="row"><span>Supprimer les espaces en trop</span><span class="sw on"></span></div>
+    <div class="row"><span>Guillemets droits</span><span class="sw"></span></div></div>
+   <div class="box" data-s="all keys svc"><div class="h" data-s="all keys">Raccourcis</div>
+    <div class="row" data-s="all keys"><span>Coller avec la mise en forme</span><span class="kbd"><i>⌥</i><i>⌘</i><i>V</i></span></div>
+    <div class="row" data-s="all keys"><span>Mettre en pause / reprendre</span><span class="kbd"><i>⌃</i><i>⌥</i><i>P</i></span></div>
+    <div class="h" data-s="all svc" style="margin-top:10px">Service système</div>
+    <div class="svc" data-s="all svc"><span class="tag ok" id="svtag">● Installé</span><span style="color:var(--t2);flex:1" id="svtxt">Lancé à l'ouverture de session</span><span class="btn" id="svbtn">Désinstaller</span></div></div></div>
+  <div class="box apps" id="appsbox" data-s="all apps"><div class="h">Applis où la mise en forme est conservée</div>
+   <div class="row"><span><i class="ai" style="background:#3b82f6">P</i>Pages</span><span class="tag tg">Exclue</span></div>
+   <div class="row"><span><i class="ai" style="background:#a855f7">K</i>Keynote</span><span class="tag tg">Exclue</span></div>
+   <div class="row"><span><i class="ai" style="background:#ef4444">M</i>Mail</span><span class="tag warn tg">Seulement le corps</span></div></div>
+  <div class="box" data-s="about" style="display:none"><div class="h">À propos</div><b>mPASTE</b> v1.0 — colle toujours en texte brut. Fait partie du DESKTOP MAC TOOLKIT.</div>
+  <div class="foot"><span class="btn" id="addapp">+ Ajouter une appli</span><span style="margin-left:auto">⌘V colle en texte brut partout, sauf dans les applis exclues</span></div>
+ </div></div></div>
+<script>
+const win=document.getElementById('win'),rr=document.getElementById('rr'),rrv=document.getElementById('rrv'),tools=document.getElementById('tools'),leg=document.getElementById('legend');
+const L={round:'Flat Round : mat, arrondi, coloré, clair/sombre, curseur d’arrondis pour tous les objets.',
+socle:'Socle standard : sombre, plat, dense, angles droits, un seul accent bleu.',
+mat:'Flat Mat : fond crème ou charbon, aplats sobres, bordures fines, accent encre/orange (style SOCiALS). Clair / sombre au choix.',
+verre:'Design Apple Stephan : cartes en verre translucide sur fond dégradé, flou et reflets.'};
+function set(d){win.dataset.d=d;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.d===d));tools.classList.toggle('on',d==='round'||d==='mat');document.querySelectorAll('.rad').forEach(e=>e.style.display=d==='round'?'':'none');leg.textContent=L[d]}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>set(b.dataset.d));
+function rad(v){document.documentElement.style.setProperty('--rr',v);win.style.setProperty('--rr',v);rr.value=v;rrv.textContent=v;document.querySelectorAll('#presets button').forEach(b=>b.classList.toggle('on',+b.dataset.v===+v))}
+rr.oninput=()=>rad(rr.value);
+document.querySelectorAll('#presets button').forEach(b=>b.onclick=()=>rad(b.dataset.v));
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>{win.dataset.th=b.dataset.th;document.querySelectorAll('#seg button').forEach(x=>x.classList.toggle('on',x===b))});
+set('round');
+
+const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+function upd(){const on=$('#swutm').classList.contains('on');$('#plain').innerHTML="Offre de printemps<br>Jusqu'à -30 % sur la gamme, voir "+(on?'mon-site.fr/':'mon-site.fr/?utm_source=mail&amp;fbclid=A9x')}
+$$('.sw').forEach(e=>e.onclick=()=>{e.classList.toggle('on');upd()});
+$$('.nav').forEach(n=>n.onclick=()=>{$$('.nav').forEach(x=>x.classList.toggle('on',x===n));const v=n.dataset.v;
+ $$('[data-s]').forEach(e=>e.style.display=e.dataset.s.split(' ').includes(v)?'':'none');
+ $$('.two').forEach(t=>t.style.gridTemplateColumns=v==='all'?'':'1fr')});
+let paused=false;$('#pause').onclick=()=>{paused=!paused;$('#pause').textContent=paused?'Reprendre':'Mettre en pause';$('#stx').textContent=paused?'Collage normal (en pause)':'Collage en texte brut actif';$('#dot').style.background=paused?'var(--warn)':'var(--ok)'};
+let inst=true;$('#svbtn').onclick=()=>{inst=!inst;$('#svbtn').textContent=inst?'Désinstaller':'Installer';$('#svtag').textContent=inst?'● Installé':'○ Non installé';$('#svtag').className='tag '+(inst?'ok':'warn');$('#svtxt').textContent=inst?"Lancé à l'ouverture de session":"Agent d'arrière-plan absent"};
+function tg(e){e.onclick=()=>{const x=e.textContent==='Exclue';e.textContent=x?'Active':'Exclue';e.className='tag tg'+(x?' ok':'')}}
+$$('.tg').forEach(tg);
+const more=[['N','Notes','#f59e0b'],['T','TextEdit','#64748b'],['S','Slack','#16a34a']];let k=0;
+$('#addapp').onclick=()=>{if(k>=more.length)return;const[a,b,c]=more[k++];const r=document.createElement('div');r.className='row';r.innerHTML='<span><i class="ai" style="background:'+c+'">'+a+'</i>'+b+'</span><span class="tag tg">Exclue</span>';$('#appsbox').appendChild(r);tg(r.lastChild)};
+</script></body></html>
