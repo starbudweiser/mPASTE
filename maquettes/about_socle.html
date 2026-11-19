@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>mPASTE — Maquette « À propos » (Socle sombre)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:13px/1.45 -apple-system,"SF Pro Text",system-ui,sans-serif;background:#0b0b0d;color:#eee;padding:20px 28px 40px}
+h1{font-size:18px;margin-bottom:4px}h1 b{color:#f59e0b}.sub{color:#999;margin-bottom:14px}
+.seg{display:inline-flex;background:#222;border-radius:4px;padding:3px;margin-bottom:18px}
+.seg button{border:0;background:none;color:#eee;font:inherit;padding:5px 14px;border-radius:3px;cursor:pointer}.seg button.on{background:#0a84ff}
+.row{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}
+.cap{color:#999;font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+/* fenêtre */
+.win{width:356px;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.tb{height:30px;display:flex;align-items:center;padding:0 12px;gap:8px}
+.tb i{width:12px;height:12px;border-radius:50%;display:block}
+.tb i.x{background:#ff5f57}
+.body{padding:28px;display:flex;flex-direction:column;align-items:center;text-align:center;font-size:12px}
+.ico{width:84px;height:84px;border-radius:19px;display:grid;place-items:center;font:800 46px/1 -apple-system,sans-serif;color:#fff;position:relative}
+.ico::before{content:"";position:absolute;left:26px;top:15px;width:32px;height:9px;border-radius:3px;background:#f59e0b}
+.body>*{max-width:300px}
+.name{font-size:17px;font-weight:700;margin-top:12px}
+.name b{color:#f59e0b}
+.ver{margin-top:6px}.desc{margin-top:18px}.aut{font-weight:700;margin-top:12px}.col,.lic,.warn{margin-top:12px}
+/* actuel */
+.old{background:#262420}.old .tb{background:#2e2c28;border-bottom:1px solid #3a3733}.old .tb i:not(.x){background:#4a4742}
+.old .ico{background:linear-gradient(#26262b,#0e0e11)}.old .name,.old .desc,.old .aut{color:#f2f2f2}.old .ver,.old .col{color:#9a9a9a}
+/* nouveau : tokens Socle sombre */
+.new{background:#131316;border:1px solid #303035}
+.new .tb{background:#232327;border-bottom:1px solid #303035}.new .tb i:not(.x){background:#2c2c31}
+.new .ico{background:#1c1c1f;border:1px solid #303035}
+.new .name{color:#fff}.new .ver,.new .col,.new .warn{color:#98989f}.new .desc,.new .lic{color:#f5f5f7}.new .aut{color:#fff}
+table{border-collapse:collapse;margin-top:6px}td{padding:5px 12px 5px 0;border-bottom:1px solid #26262a;vertical-align:middle}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #444;vertical-align:-3px;margin-right:6px}
+code{font:11.5px ui-monospace,Menlo,monospace;color:#c9d1d9}
+.notes{max-width:520px;color:#bbb}.notes li{margin:0 0 6px 18px}
+</style></head><body>
+<h1><b>m</b>PASTE — Maquette « À propos »</h1>
+<div class="sub">Couleurs sombres de Socle · structure, mesures et ordre du modèle conservés · à valider avant de coder</div>
+<div class="seg" id="seg"><button data-l="fr" class="on">Français</button><button data-l="it">Italiano (le plus long)</button></div>
+<div class="row">
+ <div><div class="cap">Actuel (couleurs du système)</div>
+  <div class="win old"><div class="tb"><i class="x"></i><i></i><i></i></div><div class="body">
+   <div class="ico">T</div><div class="name"><b>m</b>PASTE</div><div class="ver" data-k="ver"></div><div class="desc" data-k="desc"></div><div class="aut">Starbudweiser &amp; Claude Code (Anthropic)</div><div class="col" data-k="col"></div></div></div></div>
+ <div><div class="cap">Proposé (tokens Socle sombre)</div>
+  <div class="win new"><div class="tb"><i class="x"></i></div><div class="body">
+   <div class="ico">T</div><div class="name"><b>m</b>PASTE</div><div class="ver" data-k="ver"></div><div class="desc" data-k="desc"></div><div class="aut">Starbudweiser &amp; Claude Code (Anthropic)</div><div class="lic" data-k="lic"></div><div class="warn" data-k="warn"></div><div class="col" data-k="col"></div></div></div></div>
+ <div class="notes"><div class="cap">Couleurs appliquées</div>
+  <table>
+   <tr><td><span class="sw" style="background:#131316"></span>Fond de fenêtre</td><td><code>bg #131316</code></td></tr>
+   <tr><td><span class="sw" style="background:#232327"></span>Barre de titre</td><td><code>surfaceRaised #232327</code></td></tr>
+   <tr><td><span class="sw" style="background:#303035"></span>Filets</td><td><code>border #303035</code></td></tr>
+   <tr><td><span class="sw" style="background:#fff"></span>Nom, auteurs</td><td><code>textStrong #ffffff</code></td></tr>
+   <tr><td><span class="sw" style="background:#f5f5f7"></span>Description, licence</td><td><code>text #f5f5f7</code></td></tr>
+   <tr><td><span class="sw" style="background:#98989f"></span>Version, collection, avertissement</td><td><code>textMuted #98989f</code></td></tr>
+   <tr><td><span class="sw" style="background:#f59e0b"></span>Lettre « m » du nom</td><td><code>couleur du logo #f59e0b</code></td></tr>
+  </table>
+  <div class="cap" style="margin-top:18px">Ce que je modifierai</div>
+  <ul><li><b>Modèle Socle</b> (<code>swift/AboutWindow.swift</code>) : fond et textes pris dans <code>Socle.C</code> (au lieu des couleurs système), barre de titre sombre, un seul bouton de fermeture.</li>
+  <li><b>mPASTE</b> : même fenêtre, plus les lignes que la règle Socle exige et que la version actuelle n'a pas : licence + copyright, « fourni en l'état », mention d'origine (Pure Paste).</li>
+  <li>Synchronisation de Socle (local + artifact en ligne) puis recompilation de mPASTE (DEV et locale).</li></ul></div>
+</div>
+<script>
+const T={fr:{ver:'Version 1.0.0 (1)',desc:'Colle toujours en texte brut, partout.',lic:'Licence MIT. © 2026 Starbudweiser.',warn:'Fourni en l\'état, sans garantie. Inspiré de Pure Paste de Sindre Sorhus, sans lien avec son auteur.',col:'Fait partie du DESKTOP MAC TOOLKIT'},
+it:{ver:'Versione 1.0.0 (1)',desc:'Incolla sempre come testo semplice, ovunque.',lic:'Licenza MIT. © 2026 Starbudweiser.',warn:'Fornito così com\'è, senza garanzia. Ispirato a Pure Paste di Sindre Sorhus, senza legami con il suo autore.',col:'Parte del DESKTOP MAC TOOLKIT'}};
+function set(l){document.querySelectorAll('[data-k]').forEach(e=>e.textContent=T[l][e.dataset.k]);document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.l===l))}
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>set(b.dataset.l));set('fr');
+</script></body></html>

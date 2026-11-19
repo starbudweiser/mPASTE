@@ -19,6 +19,12 @@ if let i = CommandLine.arguments.firstIndex(of: "--service"), i + 1 < CommandLin
     exit(0)
 }
 
+if let i = CommandLine.arguments.firstIndex(of: "--shot-about"), i + 1 < CommandLine.arguments.count {
+    _ = NSApplication.shared
+    MainActor.assumeIsolated { Socle.apply(.dark); About.snapshot(to: CommandLine.arguments[i + 1]) }
+    exit(0)
+}
+
 let app = NSApplication.shared
 let delegate = MainActor.assumeIsolated { AppDelegate() }
 app.delegate = delegate

@@ -64,29 +64,3 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     @objc func showAbout() { About.show() }
 }
-
-/// Fenêtre « À propos » (modèle Socle) : version, description, auteurs, collection.
-@MainActor
-enum About {
-    private static var window: NSWindow?
-    static func show() {
-        window?.close()
-        let info = Bundle.main.infoDictionary ?? [:]
-        let v = info["CFBundleShortVersionString"] as? String ?? "?", b = info["CFBundleVersion"] as? String ?? "?"
-        func label(_ s: String, size: CGFloat = 12, bold: Bool = false, secondary: Bool = false) -> NSTextField {
-            let f = NSTextField(wrappingLabelWithString: s); let p = NSMutableParagraphStyle(); p.alignment = .center
-            let a = NSMutableAttributedString(string: s, attributes: [.font: bold ? NSFont.boldSystemFont(ofSize: size) : NSFont.systemFont(ofSize: size), .paragraphStyle: p, .foregroundColor: secondary ? NSColor.secondaryLabelColor : NSColor.labelColor])
-            if let r = s.range(of: "mPASTE") { a.addAttribute(.foregroundColor, value: NSColor(srgbRed: 0xf5 / 255, green: 0x9e / 255, blue: 0x0b / 255, alpha: 1), range: NSRange(r.lowerBound ..< s.index(after: r.lowerBound), in: s)) }
-            f.attributedStringValue = a; f.alignment = .center; f.preferredMaxLayoutWidth = 300; f.isSelectable = false; f.translatesAutoresizingMaskIntoConstraints = false
-            return f
-        }
-        let icon = NSImageView(image: NSApp.applicationIconImage); icon.translatesAutoresizingMaskIntoConstraints = false
-        icon.widthAnchor.constraint(equalToConstant: 84).isActive = true; icon.heightAnchor.constraint(equalToConstant: 84).isActive = true
-        let stack = NSStackView(views: [icon, label("mPASTE", size: 17, bold: true), label(L.t("about.version", v, b), secondary: true), label(L.t("app.tagline")),
-                                        label("Starbudweiser & Claude Code (Anthropic)", bold: true), label(L.t("about.collection"), secondary: true)])
-        stack.orientation = .vertical; stack.alignment = .centerX; stack.spacing = 10; stack.edgeInsets = NSEdgeInsets(top: 34, left: 28, bottom: 28, right: 28)
-        let w = NSWindow(contentRect: .zero, styleMask: [.titled, .closable], backing: .buffered, defer: false)
-        w.contentView = stack; w.isReleasedWhenClosed = false; w.title = ""; w.setContentSize(stack.fittingSize); w.center()
-        window = w; NSApp.activate(ignoringOtherApps: true); w.makeKeyAndOrderFront(nil)
-    }
-}
