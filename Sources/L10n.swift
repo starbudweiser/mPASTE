@@ -4,8 +4,11 @@ import Foundation
 enum L {
     enum Lang: Int { case fr = 0, en, es, it }
     static var lang: Lang = {
-        let pick = ProcessInfo.processInfo.environment["MPASTE_LANG"] ?? Locale.preferredLanguages.first.map { String($0.prefix(2)) } ?? "en"
-        switch pick { case "fr": return .fr; case "es": return .es; case "it": return .it; default: return .en }
+        func parse(_ code: String) -> Lang? { switch code { case "fr": return .fr; case "en": return .en; case "es": return .es; case "it": return .it; default: return nil } }
+        if let forced = ProcessInfo.processInfo.environment["MPASTE_LANG"] { return parse(forced) ?? .en }
+        // Première langue préférée du système prise en charge (liste complète), anglais sinon.
+        for id in Locale.preferredLanguages { if let l = parse(String(id.prefix(2))) { return l } }
+        return .en
     }()
     static var code: String { ["fr", "en", "es", "it"][lang.rawValue] }
 
@@ -20,12 +23,15 @@ enum L {
     static let table: [String: [String]] = [
         "app.tagline": ["Colle toujours en texte brut, partout.", "Always paste as plain text, everywhere.", "Pega siempre como texto sin formato, en todas partes.", "Incolla sempre come testo semplice, ovunque."],
         "about.version": ["Version %@ (%@)", "Version %@ (%@)", "Versión %@ (%@)", "Versione %@ (%@)"],
-        "about.collection": ["Fait partie du DESKTOP MAC TOOLKIT", "Part of the DESKTOP MAC TOOLKIT", "Parte del DESKTOP MAC TOOLKIT", "Parte del DESKTOP MAC TOOLKIT"],
+        "about.collection": ["Fait partie du DESKTOP MAC TOOLKIT", "Part of the DESKTOP MAC TOOLKIT", "Forma parte del DESKTOP MAC TOOLKIT", "Parte del DESKTOP MAC TOOLKIT"],
         "menu.about": ["À propos de mPASTE", "About mPASTE", "Acerca de mPASTE", "Informazioni su mPASTE"],
         "about.license": ["Licence MIT. © 2026 Starbudweiser.", "MIT License. © 2026 Starbudweiser.", "Licencia MIT. © 2026 Starbudweiser.", "Licenza MIT. © 2026 Starbudweiser."],
         "about.disclaimer": ["Fourni en l'état, sans garantie.", "Provided as is, without warranty.", "Se proporciona tal cual, sin garantía.", "Fornito così com'è, senza garanzia."],
         "about.credit": ["Inspiré de Pure Paste de Sindre Sorhus, sans lien avec son auteur.", "Inspired by Pure Paste by Sindre Sorhus, not affiliated with its author.", "Inspirado en Pure Paste de Sindre Sorhus, sin relación con su autor.", "Ispirato a Pure Paste di Sindre Sorhus, senza legami con il suo autore."],
         "menu.open": ["Ouvrir mPASTE…", "Open mPASTE…", "Abrir mPASTE…", "Apri mPASTE…"],
+        "menu.edit": ["Édition", "Edit", "Edición", "Modifica"],
+        "menu.copy": ["Copier", "Copy", "Copiar", "Copia"],
+        "menu.selectAll": ["Tout sélectionner", "Select All", "Seleccionar todo", "Seleziona tutto"],
         "menu.quit": ["Quitter mPASTE", "Quit mPASTE", "Salir de mPASTE", "Esci da mPASTE"],
         "menu.pause": ["Mettre en pause", "Pause", "Pausar", "Metti in pausa"],
         "menu.resume": ["Reprendre", "Resume", "Reanudar", "Riprendi"],

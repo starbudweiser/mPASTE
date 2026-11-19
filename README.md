@@ -10,21 +10,21 @@
 
 ![The mPASTE overview with plain-text paste active, the last paste and the four cleaning rules.](docs/screenshot.png)
 
-## Fonctions (1.0)
+## Features (1.0)
 
-- **⌘V en texte brut partout** (interception par événement clavier, autorisation Accessibilité) ; le presse-papiers d'origine, mise en forme comprise, est restauré juste après. **⌥⌘V** colle avec la mise en forme, **⌃⌥P** met en pause.
-- **Règles** : texte brut, retrait du pistage des liens, espaces en trop, guillemets droits.
-- **Applis exclues** : Pages, Keynote, Numbers par défaut, liste modifiable.
-- **Service système** : agent d'arrière-plan (LaunchAgent utilisateur, sans droits administrateur) installable et désinstallable depuis l'appli ; `mPASTE --service install|uninstall|status` en ligne de commande.
-- **Interface Socle standard**, français, anglais, espagnol, italien ; mise à jour automatique ; icône de barre de menus monochrome.
+- **⌘V pastes plain text everywhere** (keyboard event interception, Accessibility permission); the original clipboard, formatting included, is restored right after. **⌥⌘V** pastes with formatting, **⌃⌥P** pauses.
+- **Rules**: plain text, link tracking removal, extra spaces, straight quotes.
+- **Excluded apps**: Pages, Keynote and Numbers by default, editable list.
+- **System service**: background agent (user LaunchAgent, no administrator rights) that can be installed and uninstalled from the app; `mPASTE --service install|uninstall|status` on the command line.
+- **Standard Socle interface**, French, English, Spanish, Italian; automatic updates; monochrome menu bar icon.
 
-## Développement
+## Development
 
 ```
-DEV=1 ./build_app.sh      # édition mPASTE DEV (fr.stephan.mpaste.dev)
-./build_app.sh            # version locale, installée dans Applications Personnelles
-mPASTE --selftest         # tests du nettoyage et du fichier de service
-./release.sh 1.0.0        # notarisation et release GitHub (sur demande)
+DEV=1 ./build_app.sh      # mPASTE DEV edition (fr.stephan.mpaste.dev)
+./build_app.sh            # local version, installed in Applications Personnelles
+mPASTE --selftest         # tests of the cleaning and of the service file
+./release.sh 1.0.0        # notarization and GitHub release (on request)
 ```
 
-Voir `ARCHITECTURE.md` et `maquettes/`.
+See `ARCHITECTURE.md` and `maquettes/`.

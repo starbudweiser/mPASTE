@@ -58,8 +58,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         UpdateEngine.shared.installAppMenuItem()
         app.addItem(.separator())
         app.addItem(NSMenuItem(title: L.t("menu.quit"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        let editItem = NSMenuItem(); main.addItem(editItem); let edit = NSMenu(title: "Edit"); editItem.submenu = edit
-        edit.addItem(NSMenuItem(title: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c")); edit.addItem(NSMenuItem(title: "Select All", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a"))
+        let editItem = NSMenuItem(); main.addItem(editItem); let edit = NSMenu(title: L.t("menu.edit")); editItem.submenu = edit
+        edit.addItem(NSMenuItem(title: L.t("menu.copy"), action: #selector(NSText.copy(_:)), keyEquivalent: "c")); edit.addItem(NSMenuItem(title: L.t("menu.selectAll"), action: #selector(NSText.selectAll(_:)), keyEquivalent: "a"))
         return main
     }
     @objc func showAbout() { About.show() }
